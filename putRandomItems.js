@@ -6,20 +6,22 @@ AWS.config.update({
   region: "ap-northeast-1"
 });
 
-// const dynamodb = new AWS.DynamoDB();
-// dynamodb.describeTable({TableName: 'mytable'}, (error, data) => {
-//     console.log(data);
-// });
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
 
 var docClient = new AWS.DynamoDB.DocumentClient()
+
 var params = {
     TableName: 'mytable',
-    Key:{
-        "myPartitionKey": '0001',
-        "mySortKey": '0001'
+    Item: {
+        "myPartitionKey": getRandom(1, 1000).toString(),
+        "mySortKey": getRandom(1, 1000).toString(),
+        'key': 'value'
     }
 };
-docClient.get(params, function(err, data) {
+
+docClient.put(params, function(err, data) {
     if (err) {
         console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
     } else {
