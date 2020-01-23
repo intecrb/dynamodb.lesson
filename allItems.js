@@ -8,7 +8,7 @@ AWS.config.update({
 
 var docClient = new AWS.DynamoDB.DocumentClient()
 params = {
-    TableName: 'mytable'
+    TableName: 'Users'
 }
 docClient.scan(params, (e, d) => {
     console.log(d)
