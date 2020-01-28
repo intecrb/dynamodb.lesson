@@ -6,15 +6,21 @@ AWS.config.update({
   region: "ap-northeast-1"
 });
 
-
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
 var docClient = new AWS.DynamoDB.DocumentClient()
 
+const date = new Date(+(new Date()) - Math.floor(Math.random()*10000000000)).toISOString()
+            .replace(/T/, ' ')       // replace T with a space
+            .replace(/\..+/, '')     // delete the dot and everything after
 var params = {
-    TableName: 'mytable',
+    TableName: 'Users',
     Item: {
-        "myPartitionKey": '0001',
-        "mySortKey": '0008',
-        'key': 'value'
+        "birthday": date,
+        "userId": getRandom(1, 10000),
+        "rating": 1,
+        "friends": {Name: "Awaji", Age: 12, isActor: true}
     }
 };
 

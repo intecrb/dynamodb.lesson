@@ -16,7 +16,7 @@ var params = {
     ],
     AttributeDefinitions: [
         { AttributeName: "birthday", AttributeType: "S" },
-        { AttributeName: "userId", AttributeType: "S" }
+        { AttributeName: "userId", AttributeType: "N" }
     ],
     ProvisionedThroughput: {
         ReadCapacityUnits: 10,

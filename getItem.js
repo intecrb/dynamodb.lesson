@@ -6,23 +6,19 @@ AWS.config.update({
   region: "ap-northeast-1"
 });
 
-// const dynamodb = new AWS.DynamoDB();
-// dynamodb.describeTable({TableName: 'mytable'}, (error, data) => {
-//     console.log(data);
-// });
-
 var docClient = new AWS.DynamoDB.DocumentClient()
 var params = {
-    TableName: 'mytable',
+    TableName: 'Users',
     Key:{
-        "myPartitionKey": '0001',
-        "mySortKey": '0008'
+        "birthday": '2019-11-09 20:26:19',
+        "userId": 9785
     }
 };
 docClient.get(params, function(err, data) {
     if (err) {
         console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
     } else {
-        console.log(JSON.stringify(data, null, 2));
+        // console.log(JSON.stringify(data, null, 2));
+        console.log(data.Item.friends.isActor)
     }
 });
